@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Diwali 🎇</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at bottom, #0b0b26, #000);
+      color: white;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    h1 {
+      margin-top: 8vh;
+      color: gold;
+      font-size: clamp(2em, 5vw, 3.5em);
+      text-shadow: 0 0 25px orange, 0 0 40px red;
+      animation: glow 2s infinite alternate;
+      z-index: 3;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 20px orange; }
+      to { text-shadow: 0 0 40px gold; }
+    }
+
+    .glitter {
+      font-size: clamp(1.2em, 4vw, 2em);
+      font-weight: bold;
+      color: gold;
+      margin-top: 10px;
+      text-shadow: 0 0 10px gold, 0 0 20px orange;
+      background: linear-gradient(90deg, gold, orange, red, gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 400%;
+      animation: glitterMove 3s linear infinite;
+      z-index: 3;
+      margin: 20px;
+      margin-bottom: 40px;
+    }
+
+    @keyframes glitterMove {
+      0% { background-position: 0%; }
+      100% { background-position: 400%; }
+    }
+
+    .diya-container {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+      z-index: 2;
+    }
+
+    .diya {
+      position: relative;
+      width: clamp(60px, 15vw, 120px);
+      height: clamp(40px, 10vw, 70px);
+      background: linear-gradient(to top, #8B4513, #CD853F);
+      border-radius: 0 0 80px 80px;
+      box-shadow: 0 0 20px #ffcc00;
+      animation: floatDiya 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatDiya {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
+    }
+
+    .flame {
+      position: absolute;
+      top: -60%;
+      left: 50%;
+      width: 20%;
+      height: 90%;
+      background: radial-gradient(ellipse at bottom, #ffeb3b, #ff9800, #ff5722);
+      border-radius: 50% 50% 20% 20%;
+      transform: translateX(-50%);
+      box-shadow: 0 0 30px 10px orange;
+      animation: flicker 0.15s infinite alternate, sway 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes flicker {
+      0%, 100% { transform: translateX(-50%) scaleY(1); opacity: 1; }
+      50% { transform: translateX(-52%) scaleY(1.1); opacity: 0.9; }
+    }
+
+    @keyframes sway {
+      0% { transform: translateX(-50%) rotate(-3deg); }
+      100% { transform: translateX(-50%) rotate(3deg); }
+    }
+
+    .diya-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 150%;
+      height: 150%;
+      background: radial-gradient(circle, rgba(255,215,0,0.3), transparent 70%);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+      animation: glowPulse 2s infinite alternate;
+    }
+
+    @keyframes glowPulse {
+      0% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.8); }
+      100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.2); }
+    }
+
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: twinkle 2s infinite ease-in-out alternate;
+    }
+
+    @keyframes twinkle {
+      from { opacity: 0.3; }
+      to { opacity: 1; }
+    }
+
+    .shooting-star {
+      position: absolute;
+      width: 3px;
+      height: 80px;
+      background: linear-gradient(white, transparent);
+      border-radius: 50%;
+      opacity: 0.8;
+      transform: rotate(-45deg);
+      animation: shoot 3s linear infinite;
+    }
+
+    @keyframes shoot {
+      from { transform: translateX(0) translateY(0) rotate(-45deg); opacity: 1; }
+      to { transform: translateX(-500px) translateY(500px) rotate(-45deg); opacity: 0; }
+    }
+
+    .light {
+      position: absolute;
+      background: radial-gradient(circle, gold, transparent);
+      border-radius: 50%;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.8;
+      z-index: 1;
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(100vh); opacity: 1; }
+      to { transform: translateY(-10vh); opacity: 0; }
+    }
+
+    button {
+      background: gold;
+      border: none;
+      color: #000;
+      padding: 12px 24px;
+      font-size: 1em;
+      margin-top: 40px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: 0.3s;
+      z-index: 3;
+      position: relative;
+    }
+
+    button:hover {
+      background: orange;
+      transform: scale(1.1);
+      box-shadow: 0 0 20px orange;
+    }
+
+    /* Fireworks Styles */
+    .firework {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      box-shadow: 0 0 10px currentColor;
+      animation: fireworkRise 1.5s ease-out forwards;
+      z-index: 2;
+    }
+
+    @keyframes fireworkRise {
+      0% { transform: translateY(100vh); opacity: 1; }
+      100% { transform: translateY(var(--rise-height, 30vh)); opacity: 1; }
+    }
+
+    .spark {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      box-shadow: 0 0 8px currentColor;
+      animation: sparkExplode 1s ease-out forwards;
+      z-index: 2;
+    }
+
+    @keyframes sparkExplode {
+      0% { 
+        transform: translate(0, 0) scale(1); 
+        opacity: 1; 
+      }
+      100% { 
+        transform: translate(var(--tx, 0), var(--ty, 0)) scale(0); 
+        opacity: 0; 
+      }
+    }
+
+    .patakha {
+      position: absolute;
+      width: 8px;
+      height: 20px;
+      background: linear-gradient(to top, #ff3333, #ff9933);
+      border-radius: 2px;
+      animation: patakhaFly 1s ease-out forwards;
+      z-index: 2;
+    }
+
+    @keyframes patakhaFly {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(var(--fly-height, 40vh)) rotate(360deg); opacity: 1; }
+    }
+
+    .wise-message {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 15px;
+      font-size: 1.2em;
+      line-height: 1.6;
+      background: rgba(255, 215, 0, 0.1);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+      animation: fadeIn 2s ease-in-out;
+      position: relative;
+      z-index: 2;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 480px) {
+      button {
+        font-size: 0.9em;
+        padding: 10px 20px;
+      }
+      .diya-container {
+        gap: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>🎇 Happy Diwali 🎇</h1>
+  <div class="glitter">✨ Wishing You Joy, Light & Prosperity ✨</div>
+
+  
+  <div class="diya-container" id="diyaContainer">
+    <!-- Diyas will be added here by JavaScript -->
+  </div>
+
+  <button id="celebrateBtn">💥 Celebrate with Patakhe 💥</button>
+
+  <!-- Background Music -->
+  <audio id="bgMusic" autoplay loop>
+    <source src="diwali.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // --- Create multiple diyas ---
+    function createDiyas() {
+      const container = document.getElementById('diyaContainer');
+      const diyaCount = Math.min(7, Math.floor(window.innerWidth / 120));
+      
+      for (let i = 0; i <2; i++) {
+        const diya = document.createElement('div');
+        diya.classList.add('diya');
+        
+        // Add flame
+        const flame = document.createElement('div');
+        flame.classList.add('flame');
+        
+        // Add glow effect
+        const glow = document.createElement('div');
+        glow.classList.add('diya-glow');
+        
+        diya.appendChild(flame);
+        diya.appendChild(glow);
+        container.appendChild(diya);
+        
+        // Randomize animation delays for more natural look
+        diya.style.animationDelay = `${i * 0.2}s`;
+        flame.style.animationDelay = `${i * 0.1}s`;
+      }
+    }
+
+    // --- Stars ---
+    for (let i = 0; i < 100; i++) {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      document.body.appendChild(star);
+      const size = Math.random() * 2 + 1;
+      star.style.width = star.style.height = size + 'px';
+      star.style.top = Math.random() * 100 + 'vh';
+      star.style.left = Math.random() * 100 + 'vw';
+      star.style.animationDuration = (Math.random() * 2 + 1) + 's';
+    }
+
+    // --- Floating lights ---
+    for (let i = 0; i < 25; i++) {
+      const light = document.createElement('div');
+      light.classList.add('light');
+      document.body.appendChild(light);
+      light.style.width = light.style.height = Math.random() * 10 + 5 + 'px';
+      light.style.left = Math.random() * 100 + 'vw';
+      light.style.animationDuration = Math.random() * 5 + 3 + 's';
+      light.style.animationDelay = Math.random() * 5 + 's';
+    }
+
+    // --- Shooting stars ---
+    function createShootingStar() {
+      const star = document.createElement('div');
+      star.classList.add('shooting-star');
+      document.body.appendChild(star);
+      star.style.top = Math.random() * 40 + 'vh';
+      star.style.left = Math.random() * 100 + 'vw';
+      setTimeout(() => star.remove(), 3000);
+    }
+    setInterval(createShootingStar, 4000);
+
+    // --- Fireworks ---
+    function createFireworks(x, y) {
+      for (let i = 0; i < 15; i++) {
+        const firework = document.createElement('div');
+        firework.innerText = '💥';
+        firework.style.position = 'absolute';
+        firework.style.left = x + 'px';
+        firework.style.top = y + 'px';
+        firework.style.fontSize = '2em';
+        document.body.appendChild(firework);
+
+        const dx = Math.random() * 200 - 100;
+        const dy = Math.random() * 200 - 100;
+
+        firework.animate([
+          { transform: 'translate(0, 0)', opacity: 1 },
+          { transform: `translate(${dx}px, ${dy}px)`, opacity: 0 }
+        ], {
+          duration: 1200 + Math.random() * 600,
+          easing: 'ease-out',
+          fill: 'forwards'
+        });
+
+        setTimeout(() => firework.remove(), 1500);
+      }
+    }
+
+    // --- Colorful Sky Patakhe (Fireworks) ---
+    function createPatakha(x) {
+      // Create the patakha (firework) that rises
+      const patakha = document.createElement('div');
+      patakha.classList.add('patakha');
+      patakha.style.left = x + 'px';
+      patakha.style.setProperty('--fly-height', Math.random() * 30 + 20 + 'vh');
+      document.body.appendChild(patakha);
+
+      // After rising, explode into colorful sparks
+      setTimeout(() => {
+        patakha.remove();
+        createColorfulExplosion(x, parseFloat(patakha.style.getPropertyValue('--fly-height')));
+      }, 500);
+    }
+
+    function createColorfulExplosion(x, y) {
+      const colors = ['#ff3333', '#ff9933', '#ffff33', '#33ff33', '#3333ff', '#9933ff', '#ff33ff'];
+      const sparkCount = 40 + Math.floor(Math.random() * 30);
+
+      for (let i = 0; i < sparkCount; i++) {
+        const spark = document.createElement('div');
+        spark.classList.add('spark');
+        
+        // Random color from our palette
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        spark.style.backgroundColor = color;
+        spark.style.color = color;
+        
+        spark.style.left = x + 'px';
+        spark.style.top = y + 'vh';
+        
+        // Calculate random direction and distance for explosion
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 50 + Math.random() * 150;
+        const tx = Math.cos(angle) * distance;
+        const ty = Math.sin(angle) * distance;
+        
+        spark.style.setProperty('--tx', tx + 'px');
+        spark.style.setProperty('--ty', ty + 'px');
+        
+        document.body.appendChild(spark);
+        
+        // Remove spark after animation completes
+        setTimeout(() => {
+          spark.remove();
+        }, 1000);
+      }
+    }
+
+    // Auto-create patakhe at random positions
+    function autoCreatePatakhe() {
+      const x = Math.random() * window.innerWidth;
+      createPatakha(x);
+    }
+
+    // Create patakhe on click/tap
+    document.body.addEventListener('click', (e) => {
+      createPatakha(e.clientX);
+    });
+
+    // Button creates multiple patakhe
+    document.getElementById('celebrateBtn').addEventListener('click', (e) => {
+      e.stopPropagation();
+      for (let i = 0; i < 5; i++) {
+        setTimeout(() => {
+          const x = Math.random() * window.innerWidth;
+          createPatakha(x);
+        }, i * 300);
+      }
+    });
+
+    // Auto patakhe every few seconds
+    setInterval(autoCreatePatakhe, 3000);
+
+    // --- Flame reacts to music ---
+    const music = document.getElementById('bgMusic');
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const source = audioCtx.createMediaElementSource(music);
+    const analyser = audioCtx.createAnalyser();
+    analyser.fftSize = 256;
+
+    source.connect(analyser);
+    analyser.connect(audioCtx.destination);
+
+    const bufferLength = analyser.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
+
+    function animateFlames() {
+      requestAnimationFrame(animateFlames);
+      analyser.getByteFrequencyData(dataArray);
+      const volume = dataArray.reduce((a, b) => a + b, 0) / bufferLength;
+      const scale = 1 + volume / 200;
+      
+      // Apply animation to all flames
+      const flames = document.querySelectorAll('.flame');
+      flames.forEach(flame => {
+        flame.style.transform = `translateX(-50%) scaleY(${scale})`;
+        flame.style.boxShadow = `0 0 ${20 + volume / 5}px ${5 + volume / 10}px orange`;
+      });
+    }
+
+    window.addEventListener('touchstart', () => audioCtx.resume());
+    window.addEventListener('click', () => audioCtx.resume());
+
+    // Initialize the page
+    createDiyas();
+    
+    music.play();
+    animateFlames();
+  </script>
+</body>
+</html>
